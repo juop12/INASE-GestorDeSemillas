@@ -1,12 +1,12 @@
 <?php
 return [
-    'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
+    'debug' => true,
     
     'App' => [
         'namespace' => 'App',
-        'encoding' => env('APP_ENCODING', 'UTF-8'),
-        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'es_AR'),
-        'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'America/Argentina/Buenos_Aires'),
+        'encoding' => 'UTF-8',
+        'defaultLocale' => 'es_AR',
+        'defaultTimezone' => 'America/Argentina/Buenos_Aires',
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
@@ -23,7 +23,7 @@ return [
     ],
     
     'Security' => [
-        'salt' => env('SECURITY_SALT', '__SALT__'),
+        'salt' => 'INASE_Gestor_de_Semillas_2024_Security_Salt_Change_This_In_Production',
     ],
     
     'Asset' => [
@@ -35,11 +35,11 @@ return [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '3306'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'database' => env('DB_DATABASE', 'gestor_semillas'),
+            'host' => 'localhost',
+            'port' => '3306',
+            'username' => 'debian-sys-maint',
+            'password' => 'IXQHtvZHLjyf54Mk',
+            'database' => 'gestor_semillas',
             'encoding' => 'utf8mb4',
             'timezone' => 'UTC',
             'flags' => [],
@@ -52,11 +52,11 @@ return [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '3306'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'database' => env('DB_DATABASE', 'gestor_semillas_test'),
+            'host' => 'localhost',
+            'port' => '3306',
+            'username' => 'debian-sys-maint',
+            'password' => 'IXQHtvZHLjyf54Mk',
+            'database' => 'gestor_semillas_test',
             'encoding' => 'utf8mb4',
             'timezone' => 'UTC',
             'flags' => [],

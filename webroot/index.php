@@ -21,14 +21,6 @@ use Cake\Core\Configure;
 use Cake\Http\Server;
 
 /*
- * Load .env file if it exists
- */
-if (file_exists(dirname(__DIR__) . '/.env')) {
-    $dotenv = new \Symfony\Component\Dotenv\Dotenv();
-    $dotenv->load(dirname(__DIR__) . '/.env');
-}
-
-/*
  * Define application constants
  */
 if (!defined('DS')) {

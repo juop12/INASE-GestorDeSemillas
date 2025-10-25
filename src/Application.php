@@ -9,6 +9,7 @@ use Cake\Http\BaseApplication;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Cake\Routing\RouteBuilder;
 
 class Application extends BaseApplication
 {
@@ -17,14 +18,23 @@ class Application extends BaseApplication
         parent::bootstrap();
     }
 
+    public function routes(RouteBuilder $routes): void
+    {
+        $routes->scope('/', function (RouteBuilder $builder): void {
+            $builder->connect('/', ['controller' => 'Samples', 'action' => 'index']);
+            
+            $builder->fallbacks();
+        });
+    }
+
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         $middlewareQueue
-            ->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this))
             ->add(new AssetMiddleware([
                 'cacheTime' => Configure::read('Asset.cacheTime'),
             ]))
-            ->add(new RoutingMiddleware($this));
+            ->add(new RoutingMiddleware($this))
+            ->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this));
 
         return $middlewareQueue;
     }

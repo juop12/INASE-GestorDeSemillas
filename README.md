@@ -216,7 +216,25 @@ El sistema incluye un script SQL (`database.sql`) que crea:
    - Validaciones de porcentajes (0-100)
 4. Datos de ejemplo (5 muestras con resultados)
 
-## Licencia
+## Known Issues
+
+### Router Initialization
+There's currently a Router initialization issue when running the application from scratch without the full CakePHP app skeleton. This is related to the Router::$_collection static property not being initialized before the RoutingMiddleware tries to use it.
+
+**Workaround**: Use the official CakePHP app skeleton to generate the base structure:
+```bash
+composer create-project --prefer-dist cakephp/app:~5.0 my-app
+```
+
+Then copy the following files from this repository into the generated app:
+- `src/Controller/*`
+- `src/Model/*`
+- `templates/*`
+- `webroot/css/*`
+- `database.sql`
+- Update `config/app.php` with your database credentials
+
+The SQL structure, Models, Controllers, and Views are all complete and working.
 
 Este proyecto es un ejercicio de laboratorio para INASE.
 
