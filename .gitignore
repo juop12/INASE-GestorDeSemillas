@@ -1,0 +1,24 @@
+# CakePHP specific
+/vendor/*
+/config/app_local.php
+/tmp/*
+/logs/*
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Composer
+composer.phar
+composer.lock
+
+# Environment files
+.env
+.env.local
