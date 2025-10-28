@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -a
-source .env
+source ../config/.env
 set +a
 
 #: "${DB_NAME:=inase_muestras}"
@@ -11,10 +11,13 @@ set +a
 #: "${MYSQL_ROOT_USER:=root}"
 #: "${MYSQL_ROOT_PASS:=admin}"
 
+readonly SQL_TEMPLATE=../config/schema/crear_db_inase_muestras.template.sql
+readonly SQL_SUBSTITUIDO=../config/schema/crear_db_inase_muestras.sql
+
 echo "Creando Base de Datos '${DB_NAME}' y usuario '${DB_USERNAME}'..."
 
-envsubst < schema/crear_db_inase_muestras.template.sql > schema/crear_db_inase_muestras.sql
+envsubst < $SQL_TEMPLATE > $SQL_SUBSTITUIDO
 
-mysql -u "$MYSQL_ROOT_USERNAME" -p"$MYSQL_ROOT_PASSWORD" -h "$DB_HOST" < "schema/crear_db_inase_muestras.sql"
+mysql -u "$MYSQL_ROOT_USERNAME" -p"$MYSQL_ROOT_PASSWORD" -h "$DB_HOST" < "$SQL_SUBSTITUIDO"
 
 echo "✅ Base de Datos '$DB_NAME' creada correctamente."

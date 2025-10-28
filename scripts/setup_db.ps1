@@ -1,9 +1,9 @@
 # ChatGPT para ahorrar tiempo y esfuerzo en la conversión de scripts bash a PowerShell.
 
 # --- 1. Define Paths ---
-$ENV_FILE = ".\.env"
-$SQL_TEMPLATE = "schema\crear_db_inase_muestras.template.sql"
-$SQL_OUTPUT = "schema\crear_db_inase_muestras.sql"
+$ENV_FILE = "..\config\.env"
+$SQL_TEMPLATE = "..\config\schema\crear_db_inase_muestras.template.sql"
+$SQL_OUTPUT = "..\config\schema\crear_db_inase_muestras.sql"
 
 # --- 2. Load Environment Variables (equivalent to 'set -a; source .env; set +a') ---
 # This block reads 'export KEY="VALUE"' lines from .env and sets them as PowerShell variables.
