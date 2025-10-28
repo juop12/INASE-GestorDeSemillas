@@ -57,4 +57,4 @@ Martes 28/10:
     - Creé un nuevo proyecto desde 0 con composer.
     - Agregué la configuración de la Base de Datos al .env.
     - Creo un archivo .template.sql usado por un script para crear el .sql con los valores del .env y crear la Base de Datos. Dejo un script para bash (también git bash o wsl) y otro para windows powershell.
-    
+    - Descomento las lineas del dotenv en el config/bootstrap.php para poder usar esos valores como constantes en mi código.
