@@ -6,10 +6,30 @@ Me hubiera gustado comunicarme más con el cliente ya que creo que es importante
 
 Trabajé desde Windows usando XAMPP y Composer.
 Algunas consideraciones acerca del ambiente de trabajo para un desarrollo comodo:
-    - Descargar extensiones de VSCode de php: "Cakephp goto view" y bundle de DEVSENSE.
-    - Luego de descargar XAMPP en "C:\xampp" asegurarse de poner el path de php y mysql en los paths de windows. Para eso ir a "Propiedades" de "Mi PC" -> "Configuración Avanzada del Sistema" -> "Variables de Entorno" -> Agregar las siguientes direcciones al path de usuario o sistema: "C:xampp\php" y "C:xampp\mysql\bin" -> Ok a todas las pestañas. El path del composer se agrega solo cuando se descarga el composer usando el .exe oficial de su pagina web. 
-    - Luego de tener los paths configurados, desde la powershell se puede ejecutar el composer correctamente y comandos para mysql. Para acceder a la shell de mysql, se utiliza la siguiente linea, ya que por defecto se tiene que entrar con ese usuario:
-    ´mysql -u root´
+
+- Descargar extensiones de VSCode de php: "Cakephp goto view" y bundle de DEVSENSE.
+
+- Luego de descargar XAMPP en "C:\xampp" asegurarse de poner el path de php y mysql en los paths de windows. Para eso ir a "Propiedades" de "Mi PC" -> "Configuración Avanzada del Sistema" -> "Variables de Entorno" -> Agregar las siguientes direcciones al path de usuario o sistema: "C:xampp\php" y "C:xampp\mysql\bin" -> Ok a todas las pestañas. El path del composer se agrega solo cuando se descarga el composer usando el .exe oficial de su pagina web. 
+
+- Luego de tener los paths configurados, desde la powershell se puede ejecutar el composer correctamente y comandos para mysql. Para acceder a la shell de mysql, se utiliza la siguiente linea, ya que por defecto se tiene que entrar con ese usuario:
+
+    `mysql -u root`
+
+- Agregar contraseña al root y resto de users:
+
+```SQL
+    ALTER USER 'root'@'localhost' IDENTIFIED BY 'NEW_STRONG_PASSWORD_ROOT';
+    ALTER USER 'root'@'127.0.0.1' IDENTIFIED BY 'NEW_STRONG_PASSWORD_ROOT';
+    ALTER USER 'root'@'::1' IDENTIFIED BY 'NEW_STRONG_PASSWORD_ROOT';
+
+    FLUSH PRIVILEGES;
+```
+
+- Cambiar la configuración del phpmyadmin config.inc.php en C:\xampp\phpmyadmin. Cambiar auth_type a cookie y password a la nueva password del root:
+```Python
+    $cfg['Servers'][$i]['auth_type'] = 'cookie';
+    $cfg['Servers'][$i]['password'] = 'NEW_STRONG_PASSWORD_ROOT';
+```
 
 Viernes 24/10:
 - Empecé haciendo un relevamiento de las features. Dejé algunas preguntas para mandar, pero luego no tuve tiempo de mandarlas.
@@ -35,4 +55,6 @@ Lunes 27/10:
 
 Martes 28/10:
     - Creé un nuevo proyecto desde 0 con composer.
-    - Agregué la configuración de la Base de Datos al .env
+    - Agregué la configuración de la Base de Datos al .env.
+    - Creo un archivo .template.sql usado por un script para crear el .sql con los valores del .env y crear la Base de Datos. Dejo un script para bash (también git bash o wsl) y otro para windows powershell.
+    
