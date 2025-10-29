@@ -2,7 +2,7 @@
 
 Voy a escribir lo que fui haciendo paso por paso para que quede un registro de como fue evolucionando el proyecto.
 
-Me hubiera gustado comunicarme más con el cliente ya que creo que es importante trabajar a la par. Pero esta semana tuve muy poco tiempo para trabajar en este desarrollo, asi que decidí priorizar la implementación de una aplicación funcional que tenga las features pedidas.
+Me hubiera gustado comunicarme más con el cliente ya que creo que es importante trabajar a la par. Pero esta semana tuve muy poco tiempo para trabajar en este desarrollo, asi que decidí priorizar la implementación de una aplicación funcional que tenga las features pedidas sin llevar a cabo las mejores practicas del desarrollo de software.
 
 Trabajé desde Windows usando XAMPP y Composer.
 Algunas consideraciones acerca del ambiente de trabajo para un desarrollo comodo:
@@ -58,3 +58,16 @@ Martes 28/10:
     - Agregué la configuración de la Base de Datos al .env.
     - Creo un archivo .template.sql usado por un script para crear el .sql con los valores del .env y crear la Base de Datos. Dejo un script para bash (también git bash o wsl) y otro para windows powershell.
     - Descomento las lineas del dotenv en el config/bootstrap.php para poder usar esos valores como constantes en mi código.
+    - Ya es una aplicacion PhP con MySQL funcionando correctamente.
+    - Actualizo las dependencias y lo subo a Github
+
+
+
+
+Preguntas:
+    
+- Seria necesario usar UUID para codigo unico o puedo mi propio formato de codigo unico?
+
+- Una vez creada la muestra, se pueden editar los datos de origen?
+
+-Con respecto a los filtros. Actualmente, se pide filtrar por rango de fechas, sin embargo, no se indica que debe haber una fecha en la tabla. Esa fecha puede ser la fecha de creacion del registro o debe ser un campo extra donde los usuarios ponen una fecha relacionada a la muestra?
