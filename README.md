@@ -1,57 +1,354 @@
-# INASE-GestorDeSemillas
+# INASE - Gestor de Semillas 🌱
 
-Ejercicio laboratorio INASE - Sistema interno para registrar, gestionar y analizar muestras de semillas. Implementado con CakePHP y MySQL
+Sistema interno para registrar, gestionar y analizar muestras de semillas del laboratorio INASE.
 
-# CakePHP Application Skeleton
+![CakePHP](https://img.shields.io/badge/CakePHP-5.x-red.svg)
+![PHP](https://img.shields.io/badge/PHP-8.1+-blue.svg)
+![MySQL](https://img.shields.io/badge/MySQL-8.0+-orange.svg)
 
-![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=5.x)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+## 📋 Tabla de Contenidos
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 5.x.
+- [Características](#-características)
+- [Requisitos Previos](#-requisitos-previos)
+- [Instalación del Ambiente](#-instalación-del-ambiente)
+  - [Windows con XAMPP](#windows-con-xampp)
+  - [Linux](#linux)
+- [Configuración del Proyecto](#-configuración-del-proyecto)
+- [Ejecutar la Aplicación](#-ejecutar-la-aplicación)
+- [Extensiones Recomendadas](#-extensiones-recomendadas-para-vscode)
+- [Solución de Problemas](#-solución-de-problemas)
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+---
 
-## Installation
+## ✨ Características
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+### Estado del Desarrollo
 
-If Composer is installed globally, run
+- [ ] **Gestión de Muestras**
+  - [ ] Registrar nueva muestra
+  - [ ] Generación automática de código único
+  - [ ] Listar muestras
+  - [ ] Ver detalle de muestra
+  - [ ] Editar muestra
 
-```bash
-composer create-project --prefer-dist cakephp/app
+- [ ] **Gestión de Resultados**
+  - [ ] Agregar resultados de análisis
+  - [ ] Editar resultados existentes
+  - [ ] Validación de porcentajes
+
+- [ ] **Sistema de Reportes**
+  - [ ] Tabla resumen con todas las muestras
+  - [ ] Filtro por especie
+  - [ ] Filtro por rango de fechas
+
+- [ ] **Interfaz de Usuario**
+  - [ ] Diseño responsivo con Milligram
+  - [ ] Navegación intuitiva
+  - [ ] Mensajes de confirmación
+
+---
+
+## 🔧 Requisitos Previos
+
+### Windows
+- XAMPP (incluye PHP 8.1+ y MySQL 8.0+)
+- Composer
+- Git
+
+### Linux
+- PHP 8.1+
+- MySQL 8.0+
+- Apache2
+- Composer
+- Git
+
+---
+
+## 📦 Instalación del Ambiente
+
+### Windows con XAMPP
+
+#### 1. Instalar XAMPP
+
+Descargar e instalar [XAMPP](https://www.apachefriends.org/es/download.html) en `C:\xampp`
+
+#### 2. Instalar Composer
+
+Descargar e instalar [Composer](https://getcomposer.org/download/) usando el instalador `.exe` oficial. El PATH se configura automáticamente.
+
+#### 3. Configurar Variables de Entorno
+
+Agregar PHP y MySQL al PATH de Windows:
+
+1. Click derecho en **"Mi PC"** → **"Propiedades"**
+2. **"Configuración Avanzada del Sistema"** → **"Variables de Entorno"**
+3. Editar la variable **"Path"**
+4. Agregar:
+   ```
+   C:\xampp\php
+   C:\xampp\mysql\bin
+   ```
+5. Guardar cambios
+
+#### 4. Configurar MySQL
+
+Abrir **PowerShell como Administrador**:
+
+```powershell
+# Acceder a MySQL
+mysql -u root
+
+# Establecer contraseña para root
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'TU_CONTRASEÑA_SEGURA';
+ALTER USER 'root'@'127.0.0.1' IDENTIFIED BY 'TU_CONTRASEÑA_SEGURA';
+ALTER USER 'root'@'::1' IDENTIFIED BY 'TU_CONTRASEÑA_SEGURA';
+
+FLUSH PRIVILEGES;
+EXIT;
 ```
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
+#### 5. Configurar phpMyAdmin (Opcional)
 
-```bash
-composer create-project --prefer-dist cakephp/app myapp
+Editar `C:\xampp\phpMyAdmin\config.inc.php`:
+
+```php
+$cfg['Servers'][$i]['auth_type'] = 'cookie';
+$cfg['Servers'][$i]['password'] = 'TU_CONTRASEÑA_SEGURA';
 ```
 
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
+#### 6. Iniciar Servicios
+
+Abrir **XAMPP Control Panel** e iniciar:
+- ✅ Apache
+- ✅ MySQL
+
+---
+
+### Linux
+
+#### 1. Actualizar el Sistema
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+#### 2. Instalar Apache, PHP, MySQL y Extensiones
+
+```bash
+sudo apt install apache2 php php-cli php-mbstring php-intl php-xml php-mysql php-zip php-curl mysql-server unzip git -y
+```
+
+#### 3. Verificar Instalaciones
+
+```bash
+php -v
+mysql --version
+apache2 -v
+```
+
+#### 4. Verificar Estado de Servicios
+
+```bash
+sudo systemctl status apache2
+sudo systemctl status mysql
+```
+
+Si no están corriendo, iniciarlos:
+
+```bash
+sudo systemctl start apache2
+sudo systemctl start mysql
+```
+
+#### 5. Configurar MySQL
+
+Ejecutar el asistente de seguridad:
+
+```bash
+sudo mysql_secure_installation
+```
+
+Esto permite definir la contraseña de root y eliminar configuraciones inseguras.
+
+Acceder a MySQL:
+
+```bash
+sudo mysql -u root -p
+```
+
+#### 6. Instalar Composer
+
+```bash
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+php -r "unlink('composer-setup.php');"
+```
+
+Verificar instalación:
+
+```bash
+composer --version
+```
+
+---
+
+## 🚀 Configuración del Proyecto
+
+### 1. Clonar el Repositorio
+
+```bash
+git clone https://github.com/TU_USUARIO/INASE-GestorDeSemillas.git
+cd INASE-GestorDeSemillas
+```
+
+### 2. Instalar Dependencias
+
+```bash
+composer install
+```
+
+### 3. Configurar Variables de Entorno
+
+Editar el archivo **`config/.env`**:
+
+```properties
+# Host de la base de datos
+export DB_HOST="localhost"
+
+# Usuario y contraseña de la aplicación
+# El script setup_db va a usar estos datos para crear el usuario
+export DB_USERNAME="inase_user"
+export DB_PASSWORD=password_seguro_aqui
+
+# Nombre de la base de datos
+export DB_NAME=inase_db
+
+# Credenciales de root de MySQL
+export MYSQL_ROOT_USERNAME=root
+export MYSQL_ROOT_PASSWORD=TU_CONTRASEÑA_SEGURA
+```
+
+> **Nota:** Si no configuraste contraseña de root, deja `MYSQL_ROOT_PASSWORD` vacío.
+
+### 4. Crear la Base de Datos
+
+El script automatiza la creación de la base de datos, el usuario y las tablas.
+
+#### Windows (PowerShell)
+
+```powershell
+.\scripts\setup_db.ps1
+```
+
+#### Linux (Bash)
+
+```bash
+chmod +x scripts/setup_db.sh
+./scripts/setup_db.sh
+```
+
+### 5. Verificar Configuración
+
+El archivo **`config/app_local.php`** debería obtener estos valores usando la función **`env()`**:
+
+```php
+'Datasources' => [
+    'default' => [
+        'host' => 'localhost',
+        'username' => 'inase_user',
+        'password' => 'password_seguro_aqui',
+        'database' => 'inase_db',
+    ],
+],
+```
+
+---
+
+## 🎯 Ejecutar la Aplicación
+
+### Iniciar el Servidor
+
+```bash
+bin/cake server
+```
+
+O con un puerto específico:
 
 ```bash
 bin/cake server -p 8765
 ```
 
-Then visit `http://localhost:8765` to see the welcome page.
+### Acceder a la Aplicación
 
-## Update
+Abrir el navegador en:
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+```
+http://localhost:8765
+```
 
-## Configuration
+---
 
-Read and edit the environment specific `config/app_local.php` and set up the
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
+## 💡 Extensiones Recomendadas para VSCode
 
-## Layout
+Para mejor experiencia de desarrollo:
 
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+- **PHP Intelephense** (DEVSENSE PHP Bundle)
+- **CakePHP goto view**
+- **PHP Debug**
+
+---
+
+## 🔧 Solución de Problemas
+
+### Error de Conexión a MySQL
+
+- Verificar que MySQL esté corriendo
+- Revisar credenciales en `config/.env`
+- Confirmar permisos del usuario de base de datos
+
+### Restablecer la Base de Datos
+
+Volver a ejecutar el script de setup:
+
+**Windows:**
+```powershell
+.\scripts\setup_db.ps1
+```
+
+**Linux:**
+```bash
+./scripts/setup_db.sh
+```
+
+### Error "Class not found"
+
+```bash
+composer dump-autoload
+```
+
+### Los Cambios no se Reflejan
+
+```bash
+bin/cake cache clear_all
+```
+
+---
+
+## 🛠️ Stack Tecnológico
+
+| Tecnología | Versión |
+|------------|---------|
+| **CakePHP** | 5.x |
+| **PHP** | 8.1+ |
+| **MySQL** | 8.0+ |
+| **Milligram** | 1.3 |
+
+---
+
+## 📝 Licencia
+
+Proyecto académico para el laboratorio INASE.
+
+---
+
+**Fecha de entrega:** 29 de octubre de 2025
