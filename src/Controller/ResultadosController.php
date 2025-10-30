@@ -42,25 +42,23 @@ class ResultadosController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($muestraId = null)
     {
         $resultado = $this->Resultados->newEmptyEntity();
+
         if ($this->request->is('post')) {
             $resultado = $this->Resultados->patchEntity($resultado, $this->request->getData());
+            // setear el relacionamiento obligatoriamente
+            $resultado->muestra_id = (int)$muestraId;
+
             if ($this->Resultados->save($resultado)) {
-                $this->Flash->success(__('The resultado has been saved.'));
-
-                $muestraId = $resultado->muestra_id;
-
-
-                //return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('Resultado guardado correctamente.'));
                 return $this->redirect(['controller' => 'Muestras', 'action' => 'edit', $muestraId]);
-
             }
-            $this->Flash->error(__('The resultado could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo guardar el resultado. Verifique los datos.'));
         }
-        $muestras = $this->Resultados->Muestras->find('list', limit: 200)->all();
-        $this->set(compact('resultado', 'muestras'));
+
+        $this->set(compact('resultado', 'muestraId'));
     }
 
     /**
@@ -72,18 +70,19 @@ class ResultadosController extends AppController
      */
     public function edit($id = null)
     {
-        $resultado = $this->Resultados->get($id, contain: []);
-        if ($this->request->is(['patch', 'post', 'put'])) {
+        $resultado = $this->Resultados->get($id);
+        $muestraId = $resultado->muestra_id;
+
+        if ($this->request->is(['patch','post','put'])) {
             $resultado = $this->Resultados->patchEntity($resultado, $this->request->getData());
             if ($this->Resultados->save($resultado)) {
-                $this->Flash->success(__('The resultado has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('Resultado actualizado.'));
+                return $this->redirect(['controller' => 'Muestras', 'action' => 'edit', $muestraId]);
             }
-            $this->Flash->error(__('The resultado could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo actualizar el resultado.'));
         }
-        $muestras = $this->Resultados->Muestras->find('list', limit: 200)->all();
-        $this->set(compact('resultado', 'muestras'));
+
+        $this->set(compact('resultado', 'muestraId'));
     }
 
     /**

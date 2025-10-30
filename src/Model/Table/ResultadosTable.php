@@ -83,14 +83,6 @@ class ResultadosTable extends Table
             ->scalar('materiales_inertes')
             ->allowEmptyString('materiales_inertes');
 
-        $validator
-            ->dateTime('created_at')
-            ->notEmptyDateTime('created_at');
-
-        $validator
-            ->dateTime('updated_at')
-            ->notEmptyDateTime('updated_at');
-
         return $validator;
     }
 

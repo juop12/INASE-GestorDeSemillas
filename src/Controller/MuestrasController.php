@@ -54,9 +54,12 @@ class MuestrasController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The muestra could not be saved. Please, try again.'));
+            //debug($muestra->getErrors());
+
         }
         $this->set(compact('muestra'));
     }
+
 
     /**
      * Edit method

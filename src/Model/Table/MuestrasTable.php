@@ -58,7 +58,7 @@ class MuestrasTable extends Table
             'dependent' => true, // se borra el resultado si se borra la muestra
         ]);
     }
-
+    
     /**
      * Default validation rules.
      *
@@ -96,15 +96,22 @@ class MuestrasTable extends Table
             ->nonNegativeInteger('cantidad_semillas')
             ->notEmptyString('cantidad_semillas');
 
-        $validator
-            ->dateTime('created_at')
-            ->notEmptyDateTime('created_at');
-
-        $validator
-            ->dateTime('updated_at')
-            ->notEmptyDateTime('updated_at');
-
         return $validator;
+    }
+
+    /**
+     * beforeMarshal: se ejecuta antes de crear la entidad/validación.
+     * Aquí generamos el codigo si no viene en los datos, así pasa la validación.
+     */
+    public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
+    {
+        if (empty($data['codigo'])) {
+            // calculo simple: siguiente id estimado (no perfecto si hay concurrencia)
+            // Crea un código tipo M0001, M0002, etc.
+            $ultimo = $this->find()->select(['id'])->order(['id' => 'DESC'])->first();
+            $nextId = $ultimo ? ($ultimo->id + 1) : 1;
+            $data['codigo'] = sprintf('MUE%04d', $nextId);
+        }
     }
 
     public function beforeSave(EventInterface $event, $entity, ArrayObject $options)
