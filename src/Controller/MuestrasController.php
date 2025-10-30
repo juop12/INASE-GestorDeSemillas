@@ -54,8 +54,6 @@ class MuestrasController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The muestra could not be saved. Please, try again.'));
-            //debug($muestra->getErrors());
-
         }
         $this->set(compact('muestra'));
     }
@@ -70,7 +68,10 @@ class MuestrasController extends AppController
      */
     public function edit($id = null)
     {
-        $muestra = $this->Muestras->get($id, contain: []);
+        $muestra = $this->Muestras->get($id, [
+            'contain' => ['Resultados'],
+        ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $muestra = $this->Muestras->patchEntity($muestra, $this->request->getData());
             if ($this->Muestras->save($muestra)) {
@@ -78,7 +79,7 @@ class MuestrasController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The muestra could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo actualizar la muestra.'));
         }
         $this->set(compact('muestra'));
     }
@@ -115,14 +116,13 @@ class MuestrasController extends AppController
                 'Muestras.codigo',
                 'Muestras.empresa',
                 'Muestras.especie',
-                'Resultados.poder_germinativo',
-                'Resultados.pureza',
-                'Resultados.materiales_inertes'
+                'poder_germinativo' => 'Resultados.poder_germinativo',
+                'pureza' => 'Resultados.pureza',
+                'materiales_inertes' => 'Resultados.materiales_inertes',
             ])
             ->leftJoinWith('Resultados');
 
         $reporte = $query->all();
         $this->set(compact('reporte'));
     }
-
 }

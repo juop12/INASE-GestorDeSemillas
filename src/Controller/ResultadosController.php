@@ -19,6 +19,7 @@ class ResultadosController extends AppController
     {
         $query = $this->Resultados->find()
             ->contain(['Muestras']);
+
         $resultados = $this->paginate($query);
 
         $this->set(compact('resultados'));
@@ -49,16 +50,20 @@ class ResultadosController extends AppController
         if ($this->request->is('post')) {
             $resultado = $this->Resultados->patchEntity($resultado, $this->request->getData());
             // setear el relacionamiento obligatoriamente
-            $resultado->muestra_id = (int)$muestraId;
+            $resultado->muestra_id = (int) $muestraId;
 
             if ($this->Resultados->save($resultado)) {
                 $this->Flash->success(__('Resultado guardado correctamente.'));
-                return $this->redirect(['controller' => 'Muestras', 'action' => 'edit', $muestraId]);
+
+                return $this->redirect(['controller' => 'Muestras', 'action' => 'reporte']);
             }
             $this->Flash->error(__('No se pudo guardar el resultado. Verifique los datos.'));
+
+            return $this->redirect(['controller' => 'Muestras', 'action' => 'edit', $muestraId]);
         }
 
-        $this->set(compact('resultado', 'muestraId'));
+        //$this->set(compact('resultado', 'muestraId'));
+        return $this->redirect(['controller' => 'Muestras', 'action' => 'edit', $muestraId]);
     }
 
     /**
@@ -73,16 +78,22 @@ class ResultadosController extends AppController
         $resultado = $this->Resultados->get($id);
         $muestraId = $resultado->muestra_id;
 
-        if ($this->request->is(['patch','post','put'])) {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
             $resultado = $this->Resultados->patchEntity($resultado, $this->request->getData());
+
             if ($this->Resultados->save($resultado)) {
                 $this->Flash->success(__('Resultado actualizado.'));
-                return $this->redirect(['controller' => 'Muestras', 'action' => 'edit', $muestraId]);
+
+                return $this->redirect(['controller' => 'Muestras', 'action' => 'reporte']);
             }
             $this->Flash->error(__('No se pudo actualizar el resultado.'));
+
+            return $this->redirect(['controller' => 'Muestras', 'action' => 'edit', $muestraId]);
         }
 
-        $this->set(compact('resultado', 'muestraId'));
+        //$this->set(compact('resultado', 'muestraId'));
+        return $this->redirect(['controller' => 'Muestras', 'action' => 'edit', $muestraId]);
     }
 
     /**

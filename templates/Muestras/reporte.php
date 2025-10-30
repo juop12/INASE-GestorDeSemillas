@@ -1,5 +1,5 @@
 <div class="muestras reporte content">
-    <h2>Reporte de Muestras</h2>
+    <h2>Reporte de Muestras y Resultados</h2>
     <table>
         <thead>
             <tr>
@@ -17,9 +17,9 @@
                     <td><?= h($r->codigo) ?></td>
                     <td><?= h($r->empresa) ?></td>
                     <td><?= h($r->especie) ?></td>
-                    <td><?= h($r->resultado->poder_germinativo ?? '-') ?></td>
-                    <td><?= h($r->resultado->pureza ?? '-') ?></td>
-                    <td><?= h($r->resultado->materiales_inertes ?? '-') ?></td>
+                    <td><?= h($r->poder_germinativo ?? '-') ?></td>
+                    <td><?= h($r->pureza ?? '-') ?></td>
+                    <td><?= h($r->materiales_inertes ?? '-') ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

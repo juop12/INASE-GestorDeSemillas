@@ -55,10 +55,10 @@ class MuestrasTable extends Table
         // Asociación: una muestra tiene un resultado
         $this->hasOne('Resultados', [
             'foreignKey' => 'muestra_id',
-            'dependent' => true, // se borra el resultado si se borra la muestra
+            'dependent' => true,
         ]);
     }
-    
+
     /**
      * Default validation rules.
      *
