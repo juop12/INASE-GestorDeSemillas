@@ -49,4 +49,26 @@ class AppController extends Controller
          */
         //$this->loadComponent('FormProtection');
     }
+
+    public function beforeRender(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeRender($event);
+
+        // Only load this for HTML responses (not JSON, API, etc.)
+        if ($this->getRequest()->is('ajax') || $this->viewBuilder()->getOption('serialize')) {
+            return;
+        }
+
+        // Load the Muestras model dynamically
+        $this->Muestras = $this->getTableLocator()->get('Muestras');
+
+        // Get last 10 muestras ordered by creation date
+        $muestrasSidebar = $this->Muestras->find('all', [
+            'limit' => 10,
+            'order' => ['Muestras.created_at' => 'DESC']
+        ]);
+
+        // Make them available to all templates/layouts
+        $this->set('muestrasSidebar', $muestrasSidebar);
+    }
 }
