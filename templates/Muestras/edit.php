@@ -8,12 +8,15 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Acciones') ?></h4>
-            <?= $this->Form->postLink(
-                __('Eliminar'),
-                ['action' => 'delete', $muestra->id],
-                ['confirm' => __('¿Seguro que deseas eliminar la muestra #{0}?', $muestra->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('Volver al listado'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <ul>
+                <li><?= $this->Form->postLink(
+                    __('Eliminar'),
+                    ['action' => 'delete', $muestra->id],
+                    ['confirm' => __('¿Seguro que deseas eliminar la muestra #{0}?', $muestra->id), 'class' => 'side-nav-item']
+                ) ?></li>
+                <li><?= $this->Html->link(__('Volver al listado'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                </li>
+            </ul>
         </div>
     </aside>
 
@@ -22,9 +25,7 @@
 
             <h2>Editar Muestra</h2>
 
-            <?php if ($this->Flash->render()): ?>
-                <div class="message"><?= $this->Flash->render() ?></div>
-            <?php endif; ?>
+            <?= $this->Flash->render() ?>
 
             <?= $this->Form->create($muestra) ?>
             <fieldset>
@@ -35,7 +36,6 @@
                 <?= $this->Form->control('especie', ['label' => 'Especie']) ?>
                 <?= $this->Form->control('cantidad_semillas', ['label' => 'Cantidad de Semillas']) ?>
 
-                <!-- Estos campos se generan automáticamente, no se muestran -->
                 <?= $this->Form->hidden('codigo') ?>
                 <?= $this->Form->hidden('created_at') ?>
                 <?= $this->Form->hidden('updated_at') ?>
@@ -50,7 +50,8 @@
             <?php if (!empty($muestra->resultado)): ?>
                 <!-- Si ya tiene resultado, mostramos el formulario para editar -->
                 <?= $this->Form->create($muestra->resultado, [
-                    'url' => ['controller' => 'Resultados', 'action' => 'edit', $muestra->resultado->id]
+                    'url' => ['controller' => 'Resultados', 'action' => 'edit', $muestra->resultado->id],
+                    'class' => 'resultado-form'
                 ]) ?>
                 <?= $this->Form->control('poder_germinativo', ['label' => 'Poder Germinativo (%)']) ?>
                 <?= $this->Form->control('pureza', ['label' => 'Pureza (%)']) ?>
@@ -60,7 +61,8 @@
             <?php else: ?>
                 <!-- Si no tiene resultado, mostramos formulario para crear -->
                 <?= $this->Form->create(null, [
-                    'url' => ['controller' => 'Resultados', 'action' => 'add', $muestra->id]
+                    'url' => ['controller' => 'Resultados', 'action' => 'add', $muestra->id],
+                    'class' => 'resultado-form'
                 ]) ?>
                 <?= $this->Form->control('poder_germinativo', ['label' => 'Poder Germinativo (%)']) ?>
                 <?= $this->Form->control('pureza', ['label' => 'Pureza (%)']) ?>
@@ -70,4 +72,3 @@
             <?php endif; ?>
         </div>
     </div>
-</div>

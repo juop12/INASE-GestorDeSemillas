@@ -8,10 +8,14 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Muestra'), ['action' => 'edit', $muestra->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Muestra'), ['action' => 'delete', $muestra->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muestra->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Muestras'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Muestra'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <ul>
+                <li><?= $this->Html->link(__('Edit Muestra'), ['action' => 'edit', $muestra->id], ['class' => 'side-nav-item']) ?>
+                </li>
+                <li><?= $this->Form->postLink(__('Delete Muestra'), ['action' => 'delete', $muestra->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muestra->id), 'class' => 'side-nav-item']) ?>
+                </li>
+                <li><?= $this->Html->link(__('List Muestras'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                </li>
+                <li><?= $this->Html->link(__('New Muestra'), ['action' => 'add'], ['class' => 'side-nav-item']) ?></li>
         </div>
     </aside>
     <div class="column column-80">
