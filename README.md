@@ -24,26 +24,26 @@ Sistema interno para registrar, gestionar y analizar muestras de semillas del la
 
 ### Estado del Desarrollo
 
-- [ ] **Gestión de Muestras**
-  - [ ] Registrar nueva muestra
-  - [ ] Generación automática de código único
-  - [ ] Listar muestras
-  - [ ] Ver detalle de muestra
-  - [ ] Editar muestra
+- [X] **Gestión de Muestras**
+  - [X] Registrar nueva muestra
+  - [X] Generación automática de código único
+  - [X] Listar muestras
+  - [X] Ver detalle de muestra
+  - [X] Editar muestra
 
 - [ ] **Gestión de Resultados**
-  - [ ] Agregar resultados de análisis
-  - [ ] Editar resultados existentes
+  - [X] Agregar resultados de análisis
+  - [X] Editar resultados existentes
   - [ ] Validación de porcentajes
 
 - [ ] **Sistema de Reportes**
-  - [ ] Tabla resumen con todas las muestras
+  - [X] Tabla resumen con todas las muestras
   - [ ] Filtro por especie
   - [ ] Filtro por rango de fechas
 
 - [ ] **Interfaz de Usuario**
   - [ ] Diseño responsivo con Milligram
-  - [ ] Navegación intuitiva
+  - [X] Navegación intuitiva
   - [ ] Mensajes de confirmación
 
 ---
