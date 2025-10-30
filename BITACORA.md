@@ -32,7 +32,7 @@ Algunas consideraciones acerca del ambiente de trabajo para un desarrollo comodo
     $cfg['Servers'][$i]['password'] = 'NEW_STRONG_PASSWORD_ROOT';
 ```
 
-Viernes 24/10:
+## Viernes 24/10:
 
 - Empecé haciendo un relevamiento de las features. Dejé algunas preguntas para mandar, pero luego no tuve tiempo de mandarlas.
 
@@ -47,7 +47,7 @@ Viernes 24/10:
     - Como poner clave a mysql: https://www.youtube.com/watch?v=LltCLFxQ2Yk&t=146s
     - También busqué como dockerizarlo, pero no me dio el tiempo para implementar una infra que corra con docker.
 
-Sabado 25/10:
+## Sabado 25/10:
 
 - Viendo que Github sacó una nueva feature donde copilot puede crearte paso a paso un repositorio con una aplicación practicamente andando. Le pedi a copilot que implementara la aplicación de la consigna para ver el resultado y así poder darme una mejor idea de lo que tenía que implementar. Analicé los resultados, tanto código, como proceso de creación y ya me sentía más preparado de empezar a impementar. Sin embargo, no tuve tiempo de probar si el Pull Request de Copilot andaba o no.
 
@@ -55,14 +55,14 @@ Prompt:
 
     CakePHP 5.x + MySQL seed sample management system. Module 1: Samples with numero_precinto, empresa, especie, cantidad_semillas, auto-generated codigo_muestra. List view with detail/edit. Module 2: Results per sample - poder_germinativo %, pureza %, materiales_inertes (optional text). Module 3: Summary report filterable by especie/date range. Include README with setup/run instructions and SQL script for sample database.
 
-Lunes 27/10: 
+## Lunes 27/10: 
 
 - Empecé a jugar con la estructura base que provee el composer de php para entender un poco más el framework, lo corrí, lo conecté a la base de datos pero no desarrollé ninguna feature. Para conectar la Base De Datos hay que configurar:
 
     - Un archivo .sql para crear la DB con sus tablas. O un .template.sql que puedas usar para crear un .sql con el .env y un script.
     - Un .env con la información de la DB para poder conectar la aplicación a la DB corriendo local con XAMPP.
 
-Martes 28/10:
+## Martes 28/10:
 
 - Creé un nuevo proyecto desde 0 con composer.
 
@@ -80,14 +80,35 @@ Martes 28/10:
 
 - Hago bin/cake bake model all
 
+- Agregué el todo Muestras con bake All
+
+- Agregué el modelo y el controller de Resultados con bake controller y bake model
+
+## Miercoles 29/10:
+
+- Cambie el layout default para que tenga el front que me parecio mas intuitivo. Tiene un search bar, una lista de muestras, un boton para agregar nuevas muestras y un boton de reporte.
+
+- Agregué una accion reporte al MuestrasController para imprimir por pantalla la tabla con la información pedida. También, cree el template reporte asociado.
+
+- Hice cambios en MuestrasTable y ResultadosTable para que tengan las relaciones correctas hasOne y belongsTo.
+
+- Agregué el form para crear los resultados del analisis de una muestra en el template de edit de una muestra. Estos datos se actualizan correctamente  asociados a la muestra editada en la tabla resultados en la base de datos.  
+
+## Jueves 30/10:
+
+- Hice cambios en los controllers para que redirigen a las paginas correctas con la data correspondiente para poder hacerle display. De esta forma evite errores de redireccion a views inexistentes y pude poner la data existente tanto en el template de edit de Muestras (para la data de muestras y resultados) como en la tabla de reporte.
+
 - Agrego archivo config/schema/seed_data.sql para llenar la base de datos con ejemplos 
 
+- Agregue un "efecto" sobre la lista de muestras con la searchbar.
+
+- Actualizo el README con las features desarrolladas.
 
 
-Preguntas:
+### Preguntas:
     
 - Seria necesario usar UUID para codigo unico o puedo mi propio formato de codigo unico?
 
 - Una vez creada la muestra, se pueden editar los datos de origen?
 
--Con respecto a los filtros. Actualmente, se pide filtrar por rango de fechas, sin embargo, no se indica que debe haber una fecha en la tabla. Esa fecha puede ser la fecha de creacion del registro o debe ser un campo extra donde los usuarios ponen una fecha relacionada a la muestra?
+- Con respecto a los filtros. Actualmente, se pide filtrar por rango de fechas, sin embargo, no se indica que debe haber una fecha en la tabla. Esa fecha puede ser la fecha de creacion del registro o debe ser un campo extra donde los usuarios ponen una fecha relacionada a la muestra?
