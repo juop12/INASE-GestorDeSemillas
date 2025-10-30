@@ -18,38 +18,69 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake']) ?>
+    <?= $this->Html->css(['normalize.min', 'milligram.min', 'app']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
+
 <body>
-    <nav class="top-nav">
-        <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
-        </div>
-        <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
-        </div>
-    </nav>
-    <main class="main">
-        <div class="container">
+    <header class="topbar">
+        <h1><a href="<?= $this->Url->build('/') ?>">Gestión de Muestras</a></h1>
+    </header>
+
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Muestras</h3>
+
+            <form method="get" action="<?= $this->Url->build(['controller' => 'Muestras', 'action' => 'index']) ?>">
+                <input type="text" name="search" placeholder="Buscar por ID..." />
+            </form>
+
+            <ul class="muestras-list">
+                <?php if (!empty($muestrasSidebar)): ?>
+                    <?php foreach ($muestrasSidebar as $m): ?>
+                        <li>
+                            <?= $this->Html->link(
+                                h($m->codigo ?? 'Sin código'),
+                                ['controller' => 'Muestras', 'action' => 'view', $m->id]
+                            ) ?>
+                        </li>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <li><em>No hay muestras</em></li>
+                <?php endif; ?>
+            </ul>
+
+            <div class="sidebar-buttons">
+                <?= $this->Html->link('➕ Nueva', ['controller' => 'Muestras', 'action' => 'add'], ['class' => 'button']) ?>
+                <?= $this->Html->link('📄 Reporte', ['controller' => 'Muestras', 'action' => 'reporte'], ['class' => 'button button-outline']) ?>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="content">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
-        </div>
-    </main>
+        </main>
+    </div>
+
     <footer>
+        <p>&copy; <?= date('Y') ?> Gestión de Muestras</p>
     </footer>
 </body>
+
 </html>
