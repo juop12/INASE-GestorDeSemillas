@@ -19,11 +19,32 @@ class MuestrasController extends AppController
      */
     public function index()
     {
+        $search = $this->request->getQuery('search');
+
         $query = $this->Muestras->find();
+
+        if (!empty($search)) {
+            $query->where([
+                'OR' => [
+                    'Muestras.codigo LIKE' => "%$search%",
+                    'Muestras.empresa LIKE' => "%$search%",
+                    'Muestras.especie LIKE' => "%$search%",
+                    'Muestras.numero_precinto LIKE' => "%$search%",
+                ]
+            ]);
+        }
+
         $muestras = $this->paginate($query);
 
-        $this->set(compact('muestras'));
+        $muestrasSidebar = $this->Muestras->find()
+            ->select(['id', 'codigo'])
+            ->limit(20)
+            ->order(['created_at' => 'DESC'])
+            ->toArray();
+
+        $this->set(compact('muestras', 'muestrasSidebar', 'search'));
     }
+
 
     /**
      * View method

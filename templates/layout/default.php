@@ -36,6 +36,30 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 </head>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.querySelector('input[name="search"]');
+        const muestras = document.querySelectorAll('.muestras-list li');
+
+        if (!searchInput) return;
+
+        searchInput.addEventListener('input', () => {
+            const term = searchInput.value.trim().toLowerCase();
+
+            muestras.forEach(li => {
+                const text = li.textContent.trim().toLowerCase();
+
+                // If search box is empty, show all again
+                if (term === '') {
+                    li.classList.remove('hidden');
+                } else {
+                    li.classList.toggle('hidden', !text.includes(term));
+                }
+            });
+        });
+    });
+</script>
+
 <body>
     <header class="topbar">
         <h1><a href="<?= $this->Url->build('/') ?>">Gestión de Muestras</a></h1>
