@@ -76,6 +76,11 @@ Martes 28/10:
 
 - Actualizo las dependencias y lo subo a Github
 
+- Hago bin/cake bake all Muestras
+
+- Hago bin/cake bake model all
+
+- Agrego archivo config/schema/seed_data.sql para llenar la base de datos con ejemplos 
 
 
 
