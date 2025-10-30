@@ -1,9 +1,10 @@
 -- Inserta muestras de ejemplo
 INSERT INTO muestras (codigo, numero_precinto, empresa, especie, cantidad_semillas, created_at, updated_at)
 VALUES
-('MUE0004', 'A001', 'AgroLab SRL', 'Trigo', 500, NOW(), NOW()),
-('MUE0005', 'A002', 'Semillas del Sur', 'Soja', 800, NOW(), NOW()),
-('MUE0006', 'A003', 'BioCampo SA', 'Maíz', 1000, NOW(), NOW());
+('MUE0001', 'A001', 'AgroLab SRL', 'Trigo', 500, NOW(), NOW()),
+('MUE0002', 'A002', 'Semillas del Sur', 'Soja', 800, NOW(), NOW()),
+('MUE0003', 'A003', 'BioCampo SA', 'Maíz', 1000, NOW(), NOW());
+('MUE0004', 'A004', 'FIUBA', 'zapallo', 1500, NOW(), NOW());
 
 -- Inserta resultados de ejemplo asociados
 INSERT INTO resultados (muestra_id, poder_germinativo, pureza, materiales_inertes, created_at, updated_at)
